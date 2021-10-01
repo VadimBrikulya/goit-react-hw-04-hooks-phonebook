@@ -20,7 +20,6 @@ const Form = ({ onSubmit }) =>{
         break;
     }
   };
-  
     const handleSubmit = (e) => {
     e.preventDefault();
     onSubmit({ name, number });

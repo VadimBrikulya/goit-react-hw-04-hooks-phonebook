@@ -11,17 +11,16 @@ function App (){
   const [contacts, setContacts] = useLocalStorage("contacts", []);
   const [filter, setFilter] = useState('');
 
-  const addContact = (name, number) => {
-    const contact = {
+
+  const formOnSubmitHandler = (name, number) => {
+    const {contacts} = {
       id: uuidv4(),
       name,
       number,
     };
-    setContacts((contacts) => [contact, ...contacts]);
-    };
-
-  const formOnSubmitHandler = (name, number) => {
+    
     if (contacts.find((contact) => contact.name === name)) {
+      
       alert(`${name} is already in your list`
       );
       return;
@@ -31,7 +30,7 @@ function App (){
       );
       return;
     }
-    addContact(name, number);
+    
   }
    
    const deleteContact = (contactID) => {
