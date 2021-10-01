@@ -33,8 +33,8 @@ const App = () =>{
     setFilter(filter);
   };
 
-const getVisibleContacts = () => {
-  return contacts.filter(contact =>contact.name.toLowerCase().includes(filter)
+  const getVisibleContacts = () => {
+  return contacts.filter((contact) => contact.name.toLowerCase().includes(filter)
   );
   
   };
