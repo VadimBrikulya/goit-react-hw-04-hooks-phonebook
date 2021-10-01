@@ -1,40 +1,47 @@
-
+import React from "react";
 import { useState } from "react";
+import useLocalStorage from "./LocalStorage";
 import css from "./App.module.css";
 import { v4 as uuidv4 } from 'uuid';
 import ContactForm from "./Components/ContactForm/ContactForm";
 import ContactsList from "./Components/ContactList/ContactList";
 import Filter from "./Components/Filter/Filter";
 
-const App = () =>{
-  const [contacts, setContacts] = useState([]);
+function App (){
+  const [contacts, setContacts] = useLocalStorage("contacts", []);
   const [filter, setFilter] = useState('');
 
-    const formOnSubmitHandler = (name, number) => {
-    if (contacts.find(contact => contact.name === name)) {
-      alert(`${name} is already in your list`);
-      return;
-    }
-    
-      const contact = {
+  const addContact = (name, number) => {
+    const contact = {
       id: uuidv4(),
       name,
       number,
     };
-  setContacts(prevState => [...prevState, contact]);
+    setContacts((contacts) => [contact, ...contacts]);
     };
-  
-  
-   const deleteContact = contactID => {
-    setContacts(contacts.filter(({ id }) => id !== contactID));
+
+  const formOnSubmitHandler = (name, number) => {
+    if (contacts.find((contact) => contact.name === name)) {
+      alert(`${name} is already in your list`
+      );
+      return;
+    }
+    if (contacts.find(contact => contact.number === number)) {
+      alert(`${number} is already in your list`
+      );
+      return;
+    }
+    addContact(name, number);
+  }
+   
+   const deleteContact = (contactID) => {
+    setContacts(contacts.filter((contact) => contact.id !== contactID));
   };
 
-  const changeFilter = filter => {
-    setFilter(filter);
-  };
+  const changeFilter = (filter) => setFilter(filter.toLowerCase());
+  const visibleContacts = () => {
+    return contacts.filter((contact) =>contact.name.toLowerCase().includes(filter) ||contact.number.includes(filter)
 
-  const getVisibleContacts = () => {
-  return contacts.filter((contact) => contact.name.toLowerCase().includes(filter)
   );
   
   };
@@ -50,7 +57,7 @@ const App = () =>{
           <h2>Contacts</h2>
           <Filter value={filter} onChange={changeFilter}/>
           <ContactsList
-            contacts={getVisibleContacts()}
+            contacts={visibleContacts()}
             onDeleteContact={deleteContact}
           />
           </div>
