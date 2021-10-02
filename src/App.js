@@ -7,12 +7,10 @@ import ContactsList from "./Components/ContactList/ContactList";
 import Filter from "./Components/Filter/Filter";
 import useLocalStorage from './LocalStorage';
 
-function App (){
+const App = () =>{
   const [contacts, setContacts] = useLocalStorage("contacts", []);
   const [filter, setFilter] = useState('');
 
-
-    const {contacts} = {
  const addContact = (name, number) => {
     const contact = {
       id: shortid(),
