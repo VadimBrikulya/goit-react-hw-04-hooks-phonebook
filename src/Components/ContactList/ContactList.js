@@ -4,15 +4,15 @@ import s from './ContactList.module.css';
 
 const ContactsList = ({ contacts, onDeleteContact }) => {
   return (
-    <ul  >
+  <ul>
       {contacts.map(({ id, name, number }) => (
         <li key={id} className={s.box}>
-          <p >            
-            {name}: {number}
-              </p>
-              
-          <button            
-            type="button" className={s.btn}
+          <p>
+            {name},{number}
+          </p>
+          <button
+            className={s.btn}
+            type="button"
             onClick={() => onDeleteContact(id)}
           >
             Delete
@@ -23,7 +23,7 @@ const ContactsList = ({ contacts, onDeleteContact }) => {
   );
 };
 
-export default ContactsList;
+
 
 ContactsList.propTypes = {
   contacts: PropTypes.arrayOf(
@@ -31,7 +31,13 @@ ContactsList.propTypes = {
       id: PropTypes.string.isRequired,
       name: PropTypes.string.isRequired,
       number: PropTypes.string.isRequired,
-    }).isRequired,
+    }),
   ),
   onDeleteContact: PropTypes.func.isRequired,
 };
+
+export default ContactsList;
+
+
+
+
