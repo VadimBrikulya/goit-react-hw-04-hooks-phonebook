@@ -42,7 +42,7 @@ reset();
    setNumber( '')
 }
             
-    return (      <form onSubmit={handleSubmit}>
+    return (      <form onSubmit={handleSubmit} >
                     <label htmlFor={nameInputId}>
                         Name <input
                         type="text"
