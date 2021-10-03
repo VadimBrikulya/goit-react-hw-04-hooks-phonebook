@@ -4,21 +4,23 @@ import s from './ContactList.module.css';
 
 const ContactsList = ({ contacts, onDeleteContact }) => {
   return (
-  <ul>
-      {contacts.map(({ id, name, number }) => (
-        <li key={id} className={s.box}>
-          <p>
-            {name},{number}
-          </p>
-          <button
-            className={s.btn}
-            type="button"
-            onClick={() => onDeleteContact(id)}
-          >
-            Delete
-          </button>
-        </li>
-      ))}
+    <ul>
+      {contacts.map(({ id, name, number }) => {
+        return (
+          <li key={id} className={s.box}>
+            <p>
+              {name}:{number}
+            </p>
+            <button
+              className={s.btn}
+              type="button"
+              onClick={() => onDeleteContact(id)}
+            >
+              Delete
+            </button>
+          </li>
+        )
+      })}
     </ul>
   );
 };
@@ -26,13 +28,7 @@ const ContactsList = ({ contacts, onDeleteContact }) => {
 
 
 ContactsList.propTypes = {
-  contacts: PropTypes.arrayOf(
-    PropTypes.shape({
-      id: PropTypes.string.isRequired,
-      name: PropTypes.string.isRequired,
-      number: PropTypes.string.isRequired,
-    }),
-  ),
+  contacts: PropTypes.arrayOf(PropTypes.objectOf(PropTypes.string)).isRequired,
   onDeleteContact: PropTypes.func.isRequired,
 };
 

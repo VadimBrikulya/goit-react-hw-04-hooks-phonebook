@@ -7,45 +7,50 @@ import ContactsList from "./Components/ContactList/ContactList";
 import Filter from "./Components/Filter/Filter";
 import useLocalStorage from './LocalStorage';
 
-const App = () =>{
-  const [contacts, setContacts] = useLocalStorage("contacts", []);
+const App = () => {
+  const [contacts, setContacts] = useLocalStorage('contacts', 
+  [
+          { id: 'id-1', name: 'Rosie Simpson', number: '459-12-56' },
+    {id: 'id-2', name: 'Hermione Kline', number: '443-89-12'},
+    {id: 'id-3', name: 'Eden Clements', number: '645-17-79'},
+    {id: 'id-4', name: 'Annie Copeland', number: '227-91-26'}], );  
   const [filter, setFilter] = useState('');
 
- const addContact = (name, number) => {
+
+
+   const  formOnSubmitHandler = ({ name,number}) => {
+     contacts.find(contact =>
+       contact.name?.toLowerCase().includes(name?.toLowerCase())
+         ? alert(`${contact.name}  already exist`)
+         :addContact(name,number)
+       
+     )};
+
+
+  const addContact = ( name, number ) => {
+    
     const contact = {
-      id: shortid(),
+      id: shortid.generate(),
       name,
       number,
-    };
-
-    setContacts((contacts) => [contact, ...contacts]);
-  };
-
-  const formOnSubmitHandler = ({ name, number }) => {
-    if (contacts.find((contact) => contact.name === name)) {
-      alert(`'${name}' is already in your list`);
-      return;
     }
-    if (contacts.find((contact) => contact.number === number)) {
-      alert(`'${number}' is already in your list`);
-      return;
-    }
-    addContact(name, number);
+    console.log(contact)
+    setContacts(contacts=>[contact, ...contacts])
+  }
+     
+     
+   const deleteContact = contactId => {
+        setContacts(contacts.filter(contact => contact.id !== contactId)
+    )
+}
+     
+     
     
-  };
-
-  const deleteContact = (contId) => {
-    setContacts(contacts.filter((contact) => contact.id !== contId));
-    
-  };
-  const changeFilter = (filter) => setFilter(filter.toLowerCase());
-  const visibleContacts = () => {
-    return contacts.filter(
-      (contact) =>
-        contact.name.toLowerCase().includes(filter) ||
-        contact.number.includes(filter)
-    );
-  };
+   const changeFilter = filter => setFilter(filter.toLowerCase());
+ 
+ const  visibleContacts = () => {
+        return contacts.filter(contact => contact.name?.toLowerCase().includes(filter));
+ }
      
     return (
      
@@ -59,7 +64,7 @@ const App = () =>{
           <h2>Contacts</h2>
           <Filter value={filter} onChange={changeFilter}/>
           <ContactsList
-            contacts={visibleContacts}
+            contacts={visibleContacts()}
             onDeleteContact={deleteContact}
           />
           </div>
