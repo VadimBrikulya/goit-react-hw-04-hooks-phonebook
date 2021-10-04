@@ -51,15 +51,15 @@ const App = () => {
     return (
      
       <div>
-        <div className={css.App}>          
+        <div className={css.App} >          
           <h1>Phonebook</h1>
 
           <ContactForm onSubmit={formOnSubmitHandler} />
           </div>
         <div className={css.contactBox}>
           <h2>Contacts</h2>
-          <Filter value={filter} onChange={changeFilter}/>
-          <ContactsList
+          <Filter  value={filter} onChange={changeFilter}/>
+          <ContactsList 
             contacts={visibleContacts()}
             onDeleteContact={deleteContact}
           />

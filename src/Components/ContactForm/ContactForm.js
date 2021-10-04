@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import shortid from 'shortid';
-
+import s from './ConatctForm.module.css'
 const Form = ({onSubmit}) =>  {
 
   const [name, setName] = useState('');
@@ -42,31 +42,32 @@ reset();
    setNumber( '')
 }
             
-    return (      <form onSubmit={handleSubmit} >
-                    <label htmlFor={nameInputId}>
-                        Name <input
-                        type="text"
-                        name="name"
-                        pattern="^[a-zA-Zа-яА-Я]+(([' -][a-zA-Zа-яА-Я ])?[a-zA-Zа-яА-Я]*)*$"
-                        title="Имя может состоять только из букв, апострофа, тире и пробелов. Например Adrian, Jacob Mercer, Charles de Batz de Castelmore d'Artagnan и т. п."
-                        required
-                        value={name}
-                                        onChange={handleChange}
-                                        id={nameInputId}
-                                                />
-                                            </label>
+    return (  <form onSubmit={handleSubmit} >
+                <label htmlFor={nameInputId} >
+                        Name <input className = {s.container}
+                              type="text"
+                              name="name"
+                              pattern="^[a-zA-Zа-яА-Я]+(([' -][a-zA-Zа-яА-Я ])?[a-zA-Zа-яА-Я]*)*$"
+                              title="Имя может состоять только из букв, апострофа, тире и пробелов. Например Adrian, Jacob Mercer, Charles de Batz de Castelmore d'Artagnan и т. п."
+                              required
+                              value={name}
+                              onChange={handleChange}
+                              id={nameInputId}
+                            />
+                </label>
 
 
-                                <label htmlFor={numberInputId}>
-                        Number <input
-                        type="tel"
-                        name="number"
-                        pattern="\+?\d{1,4}?[-.\s]?\(?\d{1,3}?\)?[-.\s]?\d{1,4}[-.\s]?\d{1,4}[-.\s]?\d{1,9}"
-                        title="Номер телефона должен состоять цифр и может содержать пробелы, тире, круглые скобки и может начинаться с +"
-                        required
-                        value={number}
-                        onChange={handleChange}
-                        id={numberInputId}
+                <label htmlFor={numberInputId} >
+        Number <input
+          className = {s.container}
+                          type="tel"
+                          name="number"
+                          pattern="\+?\d{1,4}?[-.\s]?\(?\d{1,3}?\)?[-.\s]?\d{1,4}[-.\s]?\d{1,4}[-.\s]?\d{1,9}"
+                          title="Номер телефона должен состоять цифр и может содержать пробелы, тире, круглые скобки и может начинаться с +"
+                          required
+                          value={number}
+                          onChange={handleChange}
+                          id={numberInputId}
                         />
                 </label>
                 
